@@ -12,9 +12,10 @@ public class Board implements SudokuSolver {
         this.row = 0;
         this.col= 0;
         this.matrix= new int[][]{
-        { 0, 0, 0},
-        { 0, 0, 0},
-        { 0, 0, 0} };;
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0} 
+        };
         this.fullboard[0] = new int[][]{
             {0, 0, 0},
             {0, 0, 0},
@@ -101,5 +102,5 @@ public class Board implements SudokuSolver {
         else{
             return false;
         }
-    }
+    }//etc
 }
