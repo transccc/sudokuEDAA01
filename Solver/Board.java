@@ -160,9 +160,23 @@ public class Board implements SudokuSolver {
         }
         
     }
+    private int[][] con3Dto2D(){
+        int[][] board2d = new int[9][9];
+        for(int i = 0; i<9; i++){
+            for(int j = 0; j<9; j++){
+                board2d[i][j] = fullboard[findbox(i, j)][this.row][this.col];
+            }
+        }
+        return board2d;
+    }
+    
     @Override 
     public void setGrid(int[][] m){
         con2Dto3D(m);
+    }
+    @Override
+    public int[][] getGrid(){
+        return con3Dto2D();
     }
 
 }
