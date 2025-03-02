@@ -3,7 +3,6 @@ package Solver;
 import java.util.HashSet;
 import java.util.Set;
 public class Board implements SudokuSolver {
-	private int[][] matrix;
     private int[][][]fullboard;
     private int row;
     private int col;
@@ -11,11 +10,6 @@ public class Board implements SudokuSolver {
 	public Board() {
         this.row = 0;
         this.col= 0;
-        this.matrix= new int[][]{
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0} 
-        };
         this.fullboard[0] = new int[][]{
             {0, 0, 0},
             {0, 0, 0},
