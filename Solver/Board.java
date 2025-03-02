@@ -109,6 +109,54 @@ public class Board implements SudokuSolver {
             {0, 0, 0}
         };
     }
+    @Override
+    public void clearAll(){
+        this.fullboard[0] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[1] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[2] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[3] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[4] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[5] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[6] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[7] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        this.fullboard[8] = new int[][]{
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+    }
     private boolean checkBox(int row, int col){
         
         Set<Integer> trunum = new HashSet<>();
