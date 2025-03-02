@@ -1,3 +1,4 @@
+package Solver;
 public interface SudokuSolver {
 	/**
 	 * Solves the sudoku.
