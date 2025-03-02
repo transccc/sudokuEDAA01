@@ -102,6 +102,6 @@ public class Board implements SudokuSolver {
         }
         else{
             return false;
-        }
-    }
+        } 
+    }//etc etc etc
 }
