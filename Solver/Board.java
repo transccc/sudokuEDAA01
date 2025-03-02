@@ -119,6 +119,15 @@ public class Board implements SudokuSolver {
         }
            return trunum.size() == 9;
     }
+    private boolean checkBox(int boxindex){
+        Set<Integer> trunum = new HashSet<>();
+        for(int[] row1 : fullboard[boxindex]){
+            for(int i : row1){
+                trunum.add(i);
+            }
+        }
+           return trunum.size() == 9;
+    }
     private boolean checkRow(int row){
         return rowIritiate(row).size() == 9;
 
@@ -133,7 +142,14 @@ public class Board implements SudokuSolver {
     }//etc
     @Override
     public boolean isAllValid(){
-        
+        for(int i = 0; i<9; i++){
+            if(!checkBox(i)|| !checkRow(i) || !checkCol(i)){
+                return false;
+            
+            }
+        }
+        return true; 
+
     }
     
 
