@@ -74,7 +74,7 @@ public class Board implements SudokuSolver {
     }
     @Override
     public int get(int row, int col){
-        int boxIndex = (row / 3) * 3 + (col / 3);
+        int boxIndex = row  + (col / 3);
         row = row%3;
         col = col%3;
         return fullboard[boxIndex][row][col];
