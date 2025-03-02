@@ -10,6 +10,7 @@ public class Board implements SudokuSolver {
 	public Board() {
         this.row = 0;
         this.col= 0;
+        this.fullboard = new int[9][3][3];
         this.fullboard[0] = new int[][]{
             {0, 0, 0},
             {0, 0, 0},
@@ -151,6 +152,17 @@ public class Board implements SudokuSolver {
         return true; 
 
     }
-    
+    private void con2Dto3D(int[][] m){
+        for(int i = 0; i<9; i++){
+            for(int j = 0; j<9; j++){
+                fullboard[findbox(i, j)][this.row][this.col] = m[i][j];
+            }
+        }
+        
+    }
+    @Override 
+    public void setGrid(int[][] m){
+        con2Dto3D(m);
+    }
 
 }
