@@ -62,12 +62,16 @@ public class Board implements SudokuSolver {
         this.col = col%3;
         return boxIndex;
     }
-    private int findboxrow(int row){
+    private int findboxRow(int row){
         this.row = row%3;
         return row/3;
     }
+    private int findboxCol(int col){
+        this.col = col%3;
+        return col/3;
+    }
     private Set<Integer> rowIritiate(int row){
-        int startbox = findboxrow(row);
+        int startbox = findboxRow(row);
         Set<Integer> trunum = new HashSet<>();
         for(int i = 0; i<3; i++){
             for(int j : fullboard[this.row][startbox + i])
@@ -75,6 +79,15 @@ public class Board implements SudokuSolver {
             }
         return trunum;
         
+    }
+    private Set<Integer> colIritiate(int col){
+        int startbox = findboxCol(row);
+        Set<Integer> trunum = new HashSet<>();
+        for(int i = 0; i<3; i++){
+            for(int j : fullboard[this.col][startbox + i])
+            trunum.add(j);
+            }
+        return trunum;
     }
     @Override
     public void set(int row, int col, int digit){
@@ -95,39 +108,33 @@ public class Board implements SudokuSolver {
             {0, 0, 0}
         };
     }
-    @Override
-    public boolean isValid(int row, int col){
-
-    }//etc
-
     private boolean checkBox(int row, int col){
         
-            Set<Integer> trunum = new HashSet<>();
-            int boxIndex = findbox(row, col);
-            for(int[] row1 : fullboard[boxIndex]){
-                for(int i : row1){
-                    trunum.add(i);
-                }
+        Set<Integer> trunum = new HashSet<>();
+        int boxIndex = findbox(row, col);
+        for(int[] row1 : fullboard[boxIndex]){
+            for(int i : row1){
+                trunum.add(i);
             }
-            if(trunum.size() == 9){
-                return true;
-            }
-            else{
-                return false;
-            }
+        }
+           return trunum.size() == 9;
     }
     private boolean checkRow(int row){
-        if(rowIritiate(row).size() == 9){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return rowIritiate(row).size() == 9;
 
     }
-    private boolean checkCol(int row, int col){
+    private boolean checkCol(int col){
+        return colIritiate(col).size() == 9;
+    }
+    @Override
+    public boolean isValid(int row, int col){
+        return checkBox(row,col) && checkRow(row) && checkCol(col);
+
+    }//etc
+    @Override
+    public boolean isAllValid(){
         
-
     }
+    
 
 }
