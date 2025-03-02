@@ -10,7 +10,6 @@ public class Board implements SudokuSolver {
 	public Board() {
         this.row = 0;
         this.col= 0;
-        this.fullboard = new int[9][3][3];
         this.fullboard[0] = new int[][]{
             {0, 0, 0},
             {0, 0, 0},
