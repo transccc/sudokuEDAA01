@@ -62,6 +62,20 @@ public class Board implements SudokuSolver {
         this.col = col%3;
         return boxIndex;
     }
+    private int findboxrow(int row){
+        this.row = row%3;
+        return row/3;
+    }
+    private Set<Integer> rowIritiate(int row){
+        int startbox = findboxrow(row);
+        Set<Integer> trunum = new HashSet<>();
+        for(int i = 0; i<3; i++){
+            for(int j : fullboard[this.row][startbox + i])
+            trunum.add(j);
+            }
+        return trunum;
+        
+    }
     @Override
     public void set(int row, int col, int digit){
         int boxIndex = findbox(row, col);
@@ -83,18 +97,37 @@ public class Board implements SudokuSolver {
     }
     @Override
     public boolean isValid(int row, int col){
-        Set<Integer> trunum = new HashSet<>();
-        int boxIndex = findbox(row, col);
-        for(int[] row1 : fullboard[boxIndex]){
-            for(int i : row1){
-                trunum.add(i);
+
+    }//etc
+
+    private boolean checkBox(int row, int col){
+        
+            Set<Integer> trunum = new HashSet<>();
+            int boxIndex = findbox(row, col);
+            for(int[] row1 : fullboard[boxIndex]){
+                for(int i : row1){
+                    trunum.add(i);
+                }
             }
-        }
-        if(trunum.size() == 9){
+            if(trunum.size() == 9){
+                return true;
+            }
+            else{
+                return false;
+            }
+    }
+    private boolean checkRow(int row){
+        if(rowIritiate(row).size() == 9){
             return true;
         }
         else{
             return false;
         }
-    }//etc
+
+    }
+    private boolean checkCol(int row, int col){
+        
+
+    }
+
 }
