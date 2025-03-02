@@ -3,7 +3,6 @@ package Solver;
 import java.util.HashSet;
 import java.util.Set;
 public class Board implements SudokuSolver {
-	private int[][] matrix;
     private int[][][]fullboard;
     private int row;
     private int col;
@@ -11,10 +10,6 @@ public class Board implements SudokuSolver {
 	public Board() {
         this.row = 0;
         this.col= 0;
-        this.matrix= new int[][]{
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0} };;
         this.fullboard[0] = new int[][]{
             {0, 0, 0},
             {0, 0, 0},
@@ -62,7 +57,7 @@ public class Board implements SudokuSolver {
         };
 	}
     private int findbox(int row, int col){
-        int boxIndex = (row / 3) * 3 + (col / 3);
+        int boxIndex = row + col/3;
         this.row = row%3;
         this.col = col%3;
         return boxIndex;
@@ -74,10 +69,8 @@ public class Board implements SudokuSolver {
     }
     @Override
     public int get(int row, int col){
-        int boxIndex = row  + (col / 3);
-        row = row%3;
-        col = col%3;
-        return fullboard[boxIndex][row][col];
+        int boxIndex = findbox(row, col);
+        return fullboard[boxIndex][this.row][this.col];
     }
     @Override
     public void clear(int row, int col){
@@ -102,6 +95,6 @@ public class Board implements SudokuSolver {
         }
         else{
             return false;
-        } 
-    }//etc etc etc
+        }
+    }//etc
 }
