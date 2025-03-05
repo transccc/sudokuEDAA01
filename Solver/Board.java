@@ -7,6 +7,10 @@ public class Board implements SudokuSolver {
     private int row;
     private int col;
 
+    public static final int SIZE = 9;
+    public static final int SUBSIZE = 3;
+
+
 	public Board() {
         this.row = 0;
         this.col= 0;
