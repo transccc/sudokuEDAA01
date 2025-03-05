@@ -7,8 +7,8 @@ public class Board implements SudokuSolver {
     private int row;
     private int col;
 
-    public static final int SIZE = 9;
-    public static final int SUBSIZE = 3;
+    public static final int size = 9;
+    public static final int subsize = 3;
 
 
 	public Board() {
@@ -59,6 +59,16 @@ public class Board implements SudokuSolver {
             {0, 0, 0},
             {0, 0, 0}
         };
+
+        // Förslag som ersätter manuell insättning av varje element i fullboard: 
+        /**
+         * this.fullboard = new int[size][subsize][subsize];
+         * for(int i = 0; i<size;i++){
+         * this.fullboard[i] = new int[subsize][subsize];
+         * }
+         */
+        //Funkar då startvärde för int är 0, loopen kan dessutom kopieras till clearAll()
+        
 	}
     private int findbox(int row, int col){
         int boxIndex = row + col/3;

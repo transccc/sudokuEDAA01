@@ -66,6 +66,9 @@ public class SudokuGUI {
             
         });
 
-
+        clear.addActionListener((e) -> {
+            
+        });
+        
     }
 }
