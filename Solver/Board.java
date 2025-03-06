@@ -63,12 +63,9 @@ public class Board implements SudokuSolver {
         // Förslag som ersätter manuell insättning av varje element i fullboard: 
         /**
          * this.fullboard = new int[size][subsize][subsize];
-         * for(int i = 0; i<size;i++){
-         * this.fullboard[i] = new int[subsize][subsize];
-         * }
          */
-        //Funkar då startvärde för int är 0, loopen kan dessutom kopieras till clearAll()
-        
+        //Funkar då startvärde för int är 0, kan dessutom kopieras till clearAll()
+
 	}
     private int findbox(int row, int col){
         int boxIndex = row + col/3;
