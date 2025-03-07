@@ -70,7 +70,7 @@ public class Board implements SudokuSolver {
 
 	}
     private int findbox(int row, int col){
-        int boxIndex = row + col/3;
+        int boxIndex = 3*(row/3) + col/3;
         this.row = row%3;
         this.col = col%3;
         return boxIndex;
@@ -105,11 +105,17 @@ public class Board implements SudokuSolver {
     }
     @Override
     public void set(int row, int col, int digit){
+        if(row < 0 || row >= 9 || col < 0 || col >= 9) {
+            throw new ArrayIndexOutOfBoundsException("Invalid row or col");
+        }
         int boxIndex = findbox(row, col);
         fullboard[boxIndex][this.row][this.col] = digit;
     }
     @Override
     public int get(int row, int col){
+        if(row < 0 || row >= 9 || col < 0 || col >= 9) {
+            throw new ArrayIndexOutOfBoundsException("Invalid row or col");
+        }
         int boxIndex = findbox(row, col);
         return fullboard[boxIndex][this.row][this.col];
     }
@@ -234,6 +240,7 @@ public class Board implements SudokuSolver {
     @Override 
     public void setGrid(int[][] m){
         con2Dto3D(m);
+        
     }
     @Override
     public int[][] getGrid(){
