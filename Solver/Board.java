@@ -1,12 +1,10 @@
-
 package Solver;
 import java.util.HashSet;
 import java.util.Set;
 public class Board implements SudokuSolver {
     private int[][][]fullboard;
     private int row;
-    private int col;
-
+    private int col; 
     public static final int size = 9;
     public static final int subsize = 3;
 
@@ -96,7 +94,7 @@ public class Board implements SudokuSolver {
         
     }
     private Set<Integer> colIritiate(int col){
-        int startbox = findboxCol(row); // Fel? borde vara col?
+        int startbox = findboxCol(col); 
         Set<Integer> trunum = new HashSet<>();
         for(int i = 0; i<3; i++){
             for(int j : fullboard[this.col][startbox + i]){
@@ -242,8 +240,33 @@ public class Board implements SudokuSolver {
         return con3Dto2D();
     }
 
+    @Override
     public boolean solve(){
-        return false;
+        
+        return solve(0,0, 1);
+    }
+    private boolean solve(int row, int col, int digit){
+        if(col==9){
+            row +=1;
+            col=0;
+        }
+        if(get(row, col) !=0){
+            return solve(row, col+1, digit);
+        }
+        else {
+            set(digit, col, row);
+            if(isValid(col, row)){
+                return solve(row, col + 1, 1);
+            }
+            else{
+                if(digit==9){
+                    return false;
+                }
+                return solve(row, col, digit + 1);
+                
+            }
+            
+        }
     }
 
 }
