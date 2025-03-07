@@ -29,4 +29,8 @@ public class SudokuGridButton extends JButton {
             }
         });
     }
+
+    public void update(int value) {
+        setText(value == 0 ? "" : String.valueOf(value));
+    }
 }

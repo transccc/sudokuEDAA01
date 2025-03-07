@@ -1,3 +1,4 @@
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,9 +10,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-// Make sure that the imports are correct.
-import solver.MySudokuSolver;
-import solver.SudokuSolver;
+import Solver.Board;
+// Make sure that the imports are correct.'
+import Solver.SudokuSolver;
 
 public class TestSolver {
 	private SudokuSolver solver;
@@ -21,7 +22,7 @@ public class TestSolver {
 	 * */
 	@BeforeEach public void setUp() {
 		// Make sure you use the correct class of your solver.
-		this.solver = new MySudokuSolver();
+		this.solver = new Board();
 	}
 	
 	/**

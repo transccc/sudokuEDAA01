@@ -9,6 +9,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JButton;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import Solver.SudokuSolver;
@@ -20,8 +21,8 @@ public class SudokuGUI {
     private JFrame frame;
     private Container pane;
     private SudokuSolver sud;
-    private static final int SIZE = Board.SIZE;
-    private static final int SUBSIZE = Board.SUBSIZE;
+    private static final int size = Board.size;
+    private static final int subsize = Board.subsize;
 
     private SudokuGridButton[][] buttons;
 
@@ -39,36 +40,60 @@ public class SudokuGUI {
     }
 
     public void makeGrid(){
-        this.buttonGrid = new SudokuGridButton[SIZE][SIZE];
+        this.buttons = new SudokuGridButton[size][size];
         JPanel grid = new JPanel();
-        grid.setLayout(new GridLayout(SIZE , SIZE));
-        grid.setPreferredSize(new dimension(500, 500));
+        grid.setLayout(new GridLayout(size , size));
+        grid.setPreferredSize(new Dimension(500, 500));
 
-        for(int i=0; i<SIZE*SIZE;i++){
-            int row = i/SIZE;
-            int col = i%SIZE;
+        for(int i=0; i<size*size;i++){
+            int row = i/size;
+            int col = i%size;
             SudokuGridButton button = new SudokuGridButton(row, col, sud);
-            buttonGrid[row][col] = button;
+            buttons[row][col] = button;
             grid.add(button);
         }
     }
 
     private void makeButtons(){
         JButton solve = new JButton("Solve");
-        JButton check = new JButton( "Check");
         JButton clear = new JButton("Clear");
 
         solve.addActionListener(e -> {
             
         });
 
-        check.addActionListener((e) -> {
-            
+        clear.addActionListener((e) -> {
+            sud.clearAll();
+            update();
         });
 
-        clear.addActionListener((e) -> {
-            
-        });
-        
     }
+
+    private void show() {
+        frame.pack();
+        frame.setSize(500, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    public void update() {    // Update the GUI with the current state of the Sudoku grid
+        int[][] grid = sud.getGrid();
+        int amount = 0;
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[0].length; c++) {
+                if (sud.get(r, c) != 0) {
+                    amount++;
+                }
+                buttons[r][c].update(grid[r][c]);
+            }
+        }
+        progressBar.setValue(amount);
+    }
+
+
+    private void solveButton(JButton solve){
+
+    }
+
+
 }

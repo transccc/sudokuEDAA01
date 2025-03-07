@@ -14,6 +14,8 @@ public class Board implements SudokuSolver {
 	public Board() {
         this.row = 0;
         this.col= 0;
+        this.fullboard = new int[size][subsize][subsize];
+        /** 
         this.fullboard[0] = new int[][]{
             {0, 0, 0},
             {0, 0, 0},
@@ -60,6 +62,8 @@ public class Board implements SudokuSolver {
             {0, 0, 0}
         };
 
+        */
+        
         // Förslag som ersätter manuell insättning av varje element i fullboard: 
         /**
          * this.fullboard = new int[size][subsize][subsize];
@@ -92,12 +96,13 @@ public class Board implements SudokuSolver {
         
     }
     private Set<Integer> colIritiate(int col){
-        int startbox = findboxCol(row);
+        int startbox = findboxCol(row); // Fel? borde vara col?
         Set<Integer> trunum = new HashSet<>();
         for(int i = 0; i<3; i++){
-            for(int j : fullboard[this.col][startbox + i])
-            trunum.add(j);
+            for(int j : fullboard[this.col][startbox + i]){
+                trunum.add(j);
             }
+        }
         return trunum;
     }
     @Override
@@ -235,6 +240,10 @@ public class Board implements SudokuSolver {
     @Override
     public int[][] getGrid(){
         return con3Dto2D();
+    }
+
+    public boolean solve(){
+        return false;
     }
 
 }
