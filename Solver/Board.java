@@ -222,7 +222,11 @@ public class Board implements SudokuSolver {
     private void con2Dto3D(int[][] m){
         for(int i = 0; i<9; i++){
             for(int j = 0; j<9; j++){
-                fullboard[findbox(i, j)][this.row][this.col] = m[i][j];
+                int nummber = m[i][j];
+                if(nummber>9  || nummber <0){
+                    throw new IllegalArgumentException("Invalid nummber");
+                }
+                fullboard[findbox(i, j)][this.row][this.col] = nummber;
             }
         }
         
@@ -236,9 +240,18 @@ public class Board implements SudokuSolver {
         }
         return board2d;
     }
-    
+   
+
     @Override 
     public void setGrid(int[][] m){
+        if(m.length!=9){
+            throw new IllegalArgumentException("Invalid row or col");
+        }
+        for(int i = 0; i<9; i++){
+            if(m[i].length != 9){
+                throw new IllegalArgumentException("Invalid row or col");
+            }
+        }
         con2Dto3D(m);
         
     }
@@ -253,25 +266,30 @@ public class Board implements SudokuSolver {
         return solve(0,0, 1);
     }
     private boolean solve(int row, int col, int digit){
-        if(col==9){
-            row +=1;
-            col=0;
+        if (row == 9) { 
+            return true;
         }
+        if(col==9){
+            return solve(row + 1, 0, digit);
+        }
+        
         if(get(row, col) !=0){
             return solve(row, col+1, digit);
         }
         else {
-            set(digit, col, row);
-            if(isValid(col, row)){
-                return solve(row, col + 1, 1);
-            }
-            else{
-                if(digit==9){
-                    return false;
+            set(row, col, digit);
+            if(isValid(row, col)){
+                if(solve(row, col + 1, 1)){
+                    return true;
                 }
-                return solve(row, col, digit + 1);
-                
             }
+            
+            if(digit>=9){
+                return false;
+            }
+            return solve(row, col, digit + 1);
+                
+            
             
         }
     }
