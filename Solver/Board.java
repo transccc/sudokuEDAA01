@@ -302,7 +302,7 @@ public class Board implements SudokuSolver {
                     return true;
                 }
             }
-            
+            set(row, col, 0);
             if(digit>=9){
                 return false;
             }
