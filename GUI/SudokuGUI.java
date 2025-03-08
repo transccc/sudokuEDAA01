@@ -78,7 +78,8 @@ public class SudokuGUI {
 
                 }
                 else{
-                selectedButton.setText(String.valueOf(digit));
+                    update();
+                    
                 }
             });
         }
@@ -93,7 +94,8 @@ public class SudokuGUI {
         buttonsP.add(clear);
         pane.add(buttonsP, BorderLayout.SOUTH);
         solve.addActionListener(e -> {
-            
+            sud.solve();
+            update();
         });
 
         clear.addActionListener((e) -> {

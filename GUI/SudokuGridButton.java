@@ -21,7 +21,7 @@ public class SudokuGridButton extends JButton {
         this.setText("");
         this.addActionListener(e -> {
             gui.setSelectedButton(this);
-
+            
             /* if (this.sud.get(row, col) == 0){
                 this.sud.set(row, col, 1);
                 this.setText("1");
