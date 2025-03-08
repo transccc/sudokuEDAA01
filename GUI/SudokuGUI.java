@@ -4,6 +4,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JButton;
@@ -71,7 +72,14 @@ public class SudokuGUI {
                 int row = selectedButton.getRow();
                 int col = selectedButton.getCol();
                 sud.set(row, col, digit);
+                if(!sud.isValid(row, col)){
+                    JOptionPane.showMessageDialog(frame, "Invalid move.", 
+                    "Invalid Move", JOptionPane.ERROR_MESSAGE);
+
+                }
+                else{
                 selectedButton.setText(String.valueOf(digit));
+                }
             });
         }
         pane.add(sidebar, BorderLayout.EAST);
@@ -80,7 +88,10 @@ public class SudokuGUI {
     private void makeButtons(){
         JButton solve = new JButton("Solve");
         JButton clear = new JButton("Clear");
-
+        JPanel buttonsP = new JPanel();
+        buttonsP.add(solve);
+        buttonsP.add(clear);
+        pane.add(buttonsP, BorderLayout.SOUTH);
         solve.addActionListener(e -> {
             
         });
