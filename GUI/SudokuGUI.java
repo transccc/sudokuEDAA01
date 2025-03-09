@@ -4,10 +4,11 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JButton;
-
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -22,8 +23,8 @@ public class SudokuGUI {
     private Container pane;
     private SudokuSolver sud;
     private static final int size = Board.size;
+    private SudokuGridButton selectedButton = null; 
     private static final int subsize = Board.subsize;
-
     private SudokuGridButton[][] buttons;
 
     private JLabel messageField;
@@ -32,13 +33,18 @@ public class SudokuGUI {
     public SudokuGUI(SudokuSolver sud){
         this.sud = sud;
         frame = new JFrame("Sudoku");
-
+        
         pane = frame.getContentPane(); // Get the content pane of the JFrame
-        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS)); // Set the layout of the content pane to BoxLayout with vertical alignment
-
-
+        pane.setLayout(new BorderLayout()); // Set the layout of the content pane to BoxLayout with vertical alignment
+        makeGrid();
+        makeSideBarnum();
+        makeButtons();
+        show();
+        
     }
-
+    public void setSelectedButton(SudokuGridButton button) {
+        selectedButton = button;
+    }
     public void makeGrid(){
         this.buttons = new SudokuGridButton[size][size];
         JPanel grid = new JPanel();
@@ -48,18 +54,48 @@ public class SudokuGUI {
         for(int i=0; i<size*size;i++){
             int row = i/size;
             int col = i%size;
-            SudokuGridButton button = new SudokuGridButton(row, col, sud);
+            SudokuGridButton button = new SudokuGridButton(row, col, sud, this);
             buttons[row][col] = button;
             grid.add(button);
         }
+        pane.add(grid);
+    }
+    public void makeSideBarnum(){
+        
+        JPanel sidebar = new JPanel();
+        sidebar.setPreferredSize(new Dimension(100, 500)); 
+        for (int i = 1; i <= 9; i++){
+            final int digit = i;
+            JButton numberButton = new JButton(String.valueOf(i));
+            sidebar.add(numberButton);
+            numberButton.addActionListener(e -> {
+                int row = selectedButton.getRow();
+                int col = selectedButton.getCol();
+                sud.set(row, col, digit);
+                if(!sud.isValid(row, col)){
+                    JOptionPane.showMessageDialog(frame, "Invalid move.", 
+                    "Invalid Move", JOptionPane.ERROR_MESSAGE);
+
+                }
+                else{
+                    update();
+                    
+                }
+            });
+        }
+        pane.add(sidebar, BorderLayout.EAST);
     }
 
     private void makeButtons(){
         JButton solve = new JButton("Solve");
         JButton clear = new JButton("Clear");
-
+        JPanel buttonsP = new JPanel();
+        buttonsP.add(solve);
+        buttonsP.add(clear);
+        pane.add(buttonsP, BorderLayout.SOUTH);
         solve.addActionListener(e -> {
-            
+            sud.solve();
+            update();
         });
 
         clear.addActionListener((e) -> {
