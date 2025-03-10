@@ -75,6 +75,7 @@ public class SudokuGUI {
                 if(!sud.isValid(row, col)){
                     JOptionPane.showMessageDialog(frame, "Invalid move.", 
                     "Invalid Move", JOptionPane.ERROR_MESSAGE);
+                    sud.set(row, col, 0);
 
                 }
                 else{
