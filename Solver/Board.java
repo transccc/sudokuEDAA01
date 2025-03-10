@@ -128,12 +128,7 @@ public class Board implements SudokuSolver {
     }
     @Override
     public void clear(int row, int col){
-        int boxIndex = findbox(row, col);
-        fullboard[boxIndex] = new int[][]{
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0}
-        };
+        set(row,col,0);
     }
     @Override
     public void clearAll(){

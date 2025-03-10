@@ -72,7 +72,7 @@ public class SudokuGUI {
                 int row = selectedButton.getRow();
                 int col = selectedButton.getCol();
                 sud.set(row, col, digit);
-                if(!sud.isValid(row, col)){
+                if(!sud.isValid(row, col)&& sud.get(row, col) != 0){
                     JOptionPane.showMessageDialog(frame, "Invalid move.", 
                     "Invalid Move", JOptionPane.ERROR_MESSAGE);
                     sud.set(row, col, 0);
@@ -95,8 +95,16 @@ public class SudokuGUI {
         buttonsP.add(clear);
         pane.add(buttonsP, BorderLayout.SOUTH);
         solve.addActionListener(e -> {
-            sud.solve();
-            update();
+            if(sud.solve()){
+                JOptionPane.showMessageDialog(frame, "Solvable", 
+                    "Solvable", JOptionPane.INFORMATION_MESSAGE);
+                update();
+            }
+            else{
+                JOptionPane.showMessageDialog(frame, "Not Solvable", 
+                    "Solvable", JOptionPane.ERROR_MESSAGE);
+            }
+            
         });
 
         clear.addActionListener((e) -> {
