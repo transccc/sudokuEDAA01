@@ -12,7 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-
+import java.awt.Color;
 import Solver.SudokuSolver;
 import Solver.Board;
 
@@ -54,12 +54,16 @@ public class SudokuGUI {
         for(int i=0; i<size*size;i++){
             int row = i/size;
             int col = i%size;
-            SudokuGridButton button = new SudokuGridButton(row, col, sud, this);
-            buttons[row][col] = button;
-            grid.add(button);
+            
+        SudokuGridButton button = new SudokuGridButton(row, col, sud, this);
+        buttons[row][col] = button;
+        if((3*(row/3) + col/3)%2 == 0){
+            button.setBackground(Color.ORANGE);
         }
-        pane.add(grid);
+        grid.add(button);
     }
+    pane.add(grid);
+}
     public void makeSideBarnum(){
         
         JPanel sidebar = new JPanel();
